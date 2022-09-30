@@ -8,9 +8,11 @@ ATAC seq peaks called with macs2 were used to calculate sequence divergence betw
 
 We compared ACR divergence to intergenic divergence by calculating intergenic permutations. Our steps for identifing intergenic sequence can be found in /Figure2/Analysis/Intergenic_permutations/ and then divergence for these regions was performed using the same script as above.
 
+We identified nuceotide diversity within threespine stickleback fish at regulatory regions, and across intergneic permutations. These scripts can be found in /Figure3/Analyis/
 
 
-For all analyses comparing ACR with neighboring gene (Expression, dn/ds, haploinsuffiency) we found ACRs with 50kb of gametologs using homer. Scripts can be found in /Figure3/Analysis/annotatepeaks.sh/
+
+For all analyses comparing ACR with neighboring gene (Expression, dn/ds, haploinsuffiency) we found ACRs with 50kb of gametologs using homer. Scripts can be found in /Figure4/Analysis/annotatepeaks.sh/
 
 R scripts for creating each figures are found in /Rscripts_for_figures/ in each corresponding figure directory.
 
