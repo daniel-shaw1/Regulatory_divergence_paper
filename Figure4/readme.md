@@ -3,7 +3,7 @@ We compared gene expression to ACR divergence.
 
 ACR divergence from X- and Y- specific rates were calculated using /Figure2/Analysis/ACR_sequence_divergence.sh.
 
-RNA-seq alignment was described in /Sequence_alignment_and_QC/RNA_pipeline/
+RNA-seq alignment was described in /Sequence_alignment_and_QC/RNA_seq_pipeline/
 
 ACRs were assigned to genes using annotatepeaks.sh
 
