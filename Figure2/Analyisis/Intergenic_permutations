@@ -1,0 +1,11 @@
+###use bedtools shuffle to create intergenic regions of equal size to ACR.bed. Include desired regions of genome for analysis, stratumcoorindates created from nucmer alignment of XY (Peichel et al. 2020). Annotations.bed created from combining coding, and repeat annotations, and combined with ACR regions. Excluding these regions will result in only regions in 'intergenic' space.
+
+bedtools shuffle ACR.bed -g sticklebackgenome.fa -incl Stratumcoordinates.bed -excl annotations.bed
+
+
+###used gccontent.pl (Nicholas Navin, http://www.navinlab.com/bioperl/bioperl/gc_content.html) to calculate GC% of each ACR and each randomly drawn region. Find reigons with matching GC percentage to set of ACRs.
+
+
+    
+    
+    ####Next steps for intergenic matched X-linked regions is to blast and create MSA.fasta same as true ACR regions. Follow identify_ACR_divergence.sh
