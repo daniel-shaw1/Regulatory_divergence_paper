@@ -41,7 +41,7 @@ do
     else
         echo $line >> $outfile
     fi
-done < threeway_testis.fa
+done <  Xchr_numbered.fa
 
 while read line
 do
@@ -52,7 +52,7 @@ do
     else
         echo $line >> $outfile
     fi
-done < new_file_.fa
+done <  Ychr_numbered.fa
 
 while read line
 do
@@ -63,10 +63,10 @@ do
     else
         echo $line >> $outfile
     fi
-done < new_file_Y.fa
+done < Ninespine_numbered.fa
 
 
-##Use cat command to merge chromosomes for each correpsoning region based on the number in the name. ACR1.fasta should contain three sequences, X, Y, and Ninespine, of correpsoning blast alignment.
+##Use cat command to merge chromosomes for each correpsonding region based on the number in the name. ACR1.fasta should contain three sequences, X, Y, and Ninespine, of correpsoning blast alignment.
 
 cat *_1* > ACR1.fasta
 
