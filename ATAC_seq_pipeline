@@ -1,0 +1,63 @@
+
+###trim reads
+module load Trimmomatic/0.36-Java-1.8.0_144
+
+
+for file in *_R1_*
+
+do
+  export iden=${file%%.fastq.gz}
+  export log=${iden}.log
+  export output=${iden}_trim.fastq.gz
+java -jar /usr/local/apps/eb/Trimmomatic/0.36-Java-1.8.0_144/trimmomatic-0.36.jar PE -threads 16 -phred64 -trimlog ${bam}.log -basein ${file} -baseout ${output}_trim.fastq.gz ILLUMINACLIP:/usr/local/apps/eb/Trimmomatic/0.36-Java-1.8.0_144/adapters/NexteraPE-PE.fa:2:30:10 LEADING:0 TRAILING:0 MINLEN:30
+done
+
+
+#####Align trimmed reads with bowtie2
+
+export cores=24
+export bam=LW_L2_F
+export outDir="."
+module load Bowtie2/2.3.4.1-foss-2016b
+
+export btBuild=/scratch/des65576/stick
+export read1_list=`ls -m *1P* | tr -d ' \n'`
+export read2_list=`ls -m *2P* | tr -d ' \n'`
+
+bowtie2 -p ${cores} --no-unal -x ${btBuild} \
+        -1 ${read1_list} \
+        -2 ${read2_list} \
+        -S ${outDir}/${bam}.sam
+		
+###Filter for map quality
+
+
+module load SAMtools/1.6-foss-2016b
+
+for file in *.bam
+do
+        export iden=${file%%.*}
+        samtools view -bq 25 ${file} > ${iden}_MapQ.bam
+
+done		
+###mark PCR duplicates
+
+ml picard/2.4.1-Java-1.8.0_144
+ml SAMtools/1.9-foss-2016b
+
+for file in *MapQ*
+do
+        export iden=${file%%_.*}
+        export output=${iden}_mdup.bam
+        export met=${iden}metrics.txt
+        java -Xmx20g -classpath "/usr/local/apps/eb/picard/2.16.0-Java-1.8.0_144/" -jar /usr/local/apps/eb/picard/2.16.0-Java-1.8.0_144/picard.jar MarkDuplicates REMOVE_DUPLICATES=true I=${file} O=${output} M=${met}
+        samtools index -b ${output}
+done
+
+### peak calling
+module load macs2/2.1.1
+
+macs2 callpeak -t LiverATAC-1.bed -g hs --keep-dup all -c tn5.bam -n Liver-1macs 
+macs2 callpeak -t LiverATAC-2.bed -g hs --keep-dup all -c tn5.bam -n Liver-2macs
+macs2 callpeak -t TestisATAC-1.bed -g hs --keep-dup all -c tn5.bam -n Testis-1macs
+macs2 callpeak -t TestisATAC-2.bed -g hs --keep-dup all -c tn5.bam -n Testis-2macs
