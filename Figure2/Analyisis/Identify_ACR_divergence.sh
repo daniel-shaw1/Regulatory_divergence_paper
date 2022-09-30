@@ -1,3 +1,9 @@
+###This file contains a general pipeline for converting ATAC-seq peak bedfiles into estimages of sequence divergence across species at ATAC-seq peak sites. 
+##Briefly, we convert bed files of X-linked peaks to fasta files. Align fasta files to Y and ninespine geneome using blastn. Extract alignments into 3way multiple sequence alignments. And call variants between these alignemtns.
+
+
+
+
 ###Convert ACR bed file to fasta using bedtools
 
 bedtools getfasta -fi CombinedX.fa -bed Peaks.bed -fo Peaks.fa
