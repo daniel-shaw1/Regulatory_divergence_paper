@@ -12,7 +12,7 @@ We identified nuceotide diversity within threespine stickleback fish at regulato
 
 
 
-For all analyses comparing ACR with neighboring gene (Expression, dn/ds, haploinsuffiency) we found ACRs with 50kb of gametologs using homer. Scripts can be found in /Figure4/Analysis/annotatepeaks.sh/
+For all analyses comparing ACR with neighboring gene (Expression, dn/ds, haploinsuffiency) we found assigned ACRs to genes using homer. Scripts can be found in /Figure4/Analysis/annotatepeaks.sh/
 
 R scripts for creating each figures are found in /Rscripts_for_figures/ in each corresponding figure directory.
 
