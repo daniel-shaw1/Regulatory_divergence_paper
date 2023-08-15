@@ -1,6 +1,9 @@
 
-For Figure 3. Illumina sequencing from 12 males was processed using GATK pipeline to calculate nucletotide diversity.
+For Figure 3. X- and Y- specific variants were counted from Figure2, and polymorphisms were counted from vcfs generated from 12 freshwater stickleback males.
 
-We plotted nucleotide diversity across the same set of intergenic sites as used in Figure 2.
+Non-coding MK test was performed based on Andolfatto 2005. 
 
-We used low_read_depth.pl to remove sites with too low of sequencing coverage on the X and Y.
+Dn= ACR fixed variant
+Ds= Intergenic fixed variant
+Pn= ACR polymorphism
+Ps= Intergenic polymorphism
