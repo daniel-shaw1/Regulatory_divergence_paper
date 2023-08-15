@@ -1,5 +1,5 @@
 # Regulatory_divergence_paper
-This repository contains the scripts associated with: Positive selection drives cis-regulatory evolution across the threespine stickleback Y chromosome. https://www.biorxiv.org/content/10.1101/2022.11.03.515077v1
+This repository contains the scripts associated with: Positive selection drives cis-regulatory evolution across the threespine stickleback Y chromosome. (https://www.biorxiv.org/content/10.1101/2022.11.03.515077v2)
 
 
 We aligned ATAC-seq data following the ATAC_seq_pipeline and RNA-seq data using RNA_seq_pipeline. For RNA-seq we used a custom gtf for XY gametologs created using XY_customgtf. The general pipeline, programs, and command line parameters can be found in /Sequence_alignment_and_QC/ATAC_seq_pipeline and Sequence_alignment_and_QC/RNA_seq_pipeline
