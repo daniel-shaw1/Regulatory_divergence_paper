@@ -11,6 +11,9 @@ We compared ACR divergence to intergenic divergence by calculating intergenic pe
 We identified nuceotide diversity within threespine stickleback fish at regulatory regions, and across intergneic permutations. These scripts can be found in /Figure3/Analyis/
 
 
+You can also find a more curated ATAC-seq pipeline at: https://github.com/daniel-shaw1/ATAC-seq
+
+
 
 For all analyses comparing ACR with neighboring gene (Expression, dn/ds, haploinsuffiency) we found assigned ACRs to genes using homer. Scripts can be found in /Figure4/Analysis/annotatepeaks.sh/
 
