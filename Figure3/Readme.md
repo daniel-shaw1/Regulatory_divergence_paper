@@ -8,6 +8,8 @@ Ds= Intergenic fixed variant
 Pn= ACR polymorphism
 Ps= Intergenic polymorphism
 
+NUmbers of variants, and ACR lengths were resampled with replacement using bootstrap.py
+
 
 
 ##
