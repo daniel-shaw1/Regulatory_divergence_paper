@@ -7,3 +7,8 @@ Dn= ACR fixed variant
 Ds= Intergenic fixed variant
 Pn= ACR polymorphism
 Ps= Intergenic polymorphism
+
+
+
+##
+Histogram.r and low_read_depth were moved to supplement.
