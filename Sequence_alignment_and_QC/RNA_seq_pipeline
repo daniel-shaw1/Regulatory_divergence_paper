@@ -1,1 +1,68 @@
+###Here is a general pipeline for processing and alinging RNA-seq data to compare X and Y gene expression stickleback fish
+
+###trim reads
+module load Trimmomatic/0.36-Java-1.8.0_144
+
+
+for file in *_R1_*
+
+do
+  export iden=${file%%.fastq.gz}
+  export log=${iden}.log
+  export output=${iden}_trim.fastq.gz
+java -jar /usr/local/apps/eb/Trimmomatic/0.36-Java-1.8.0_144/trimmomatic-0.36.jar PE -threads 16 -phred64 -trimlog ${bam}.log -basein ${file} -baseout ${output}_trim.fastq.gz ILLUMINACLIP:/usr/local/apps/eb/Trimmomatic/0.36-Java-1.8.0_144/adapters/NexteraPE-PE.fa:2:30:10 LEADING:0 TRAILING:0 MINLEN:30
+done
+
+
+#####Align trimmed reads with tophat2
+
+
+
+module load TopHat/2.1.2-foss-2019b
+module load Bowtie2/2.4.1-GCC-8.3.0
+ 
+cd /scratch/des65576/RNAdatadec/Liver-Juvenile/S2/
+ 
+export btBuild=/scratch/des65576/Short_read_iso/male
+export read1_list=`ls -m *1P* | tr -d ' \n'`
+export read2_list=`ls -m *2P* | tr -d ' \n'`
+
+tophat   ${btBuild} \
+         ${read1_list} \
+         ${read2_list} \
+         ${outDir}/${bam}.sam
+
+		
+###Filter for map quality
+
+
+module load SAMtools/1.6-foss-2016b
+
+for file in *.bam
+do
+        export iden=${file%%.*}
+        samtools view -bq 25 ${file} > ${iden}_MapQ.bam
+
+done		
+###mark PCR duplicates
+
+ml picard/2.4.1-Java-1.8.0_144
+ml SAMtools/1.9-foss-2016b
+
+for file in *MapQ*
+do
+        export iden=${file%%_.*}
+        export output=${iden}_mdup.bam
+        export met=${iden}metrics.txt
+        java -Xmx20g -classpath "/usr/local/apps/eb/picard/2.16.0-Java-1.8.0_144/" -jar /usr/local/apps/eb/picard/2.16.0-Java-1.8.0_144/picard.jar MarkDuplicates REMOVE_DUPLICATES=true I=${file} O=${output} M=${met}
+        samtools index -b ${output}
+done
+
+
+##Count transcripts of custom gtf with htseq
+ml HTSeq/0.9.1-intel-2019b-Python-2.7.16
+
+htseq-count -f bam --order pos --nonunique all --minaqual 10 -t exon -r name Brain-S3_RNA.bam Yensembl.gtf > Three_results_BS3Y.tsv
+htseq-count -f bam --order pos --nonunique all --minaqual 10 -t exon -r name Brain-S2_RNA.bam Yensembl.gtf > Three_results_BS2Y.tsv
+htseq-count -f bam --order pos --nonunique all --minaqual 10 -t exon -r name Brain-S1_RNA.bam Yensembl.gtf > Three_results_BS1Y.tsv 
 
